@@ -28,8 +28,26 @@
     </section>
   </main>
 
+  <!-- Modal para mostrar dica com título fixo -->
+  <div id="tipModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-labelledby="modalTitle">
+      <header class="modal-header">
+        <h2 id="modalTitle">Dica do Dia</h2>
+        <button id="modalClose" aria-label="Fechar">✕</button>
+      </header>
+      <div class="modal-body">
+        <h3 id="modalTipTitle"></h3>
+        <p id="modalTipText"></p>
+      </div>
+      <footer class="modal-footer">
+        <button id="modalCopy">Copiar</button>
+        <button id="modalCloseFooter">Fechar</button>
+      </footer>
+    </div>
+  </div>
+
   <footer class="site-footer">
-    <small>Feito com ❤️ — Abra o arquivo <code>index.html</code> no navegador.</small>
+    <small>Feito com o ❤️.</small>
   </footer>
 
   <script src="script.js"></script>

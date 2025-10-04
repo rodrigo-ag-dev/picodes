@@ -130,7 +130,42 @@ function render(){
 function showRandom(){
   const idx = Math.floor(Math.random() * tips.length)
   const tip = tips[idx]
-  alert(`${tip.title}\n\n${tip.text}`)
+  // preencher modal
+  const modal = document.getElementById('tipModal')
+  const modalTipTitle = document.getElementById('modalTipTitle')
+  const modalTipText = document.getElementById('modalTipText')
+  const modalCopy = document.getElementById('modalCopy')
+  const modalClose = document.getElementById('modalClose')
+  const modalCloseFooter = document.getElementById('modalCloseFooter')
+
+  modalTipTitle.textContent = tip.title
+  modalTipText.textContent = tip.text
+  modal.setAttribute('aria-hidden', 'false')
+
+  function closeModal(){
+    modal.setAttribute('aria-hidden','true')
+    // remover listeners para evitar acúmulo
+    modalCopy.removeEventListener('click', onCopy)
+    modalClose.removeEventListener('click', onClose)
+    modalCloseFooter.removeEventListener('click', onClose)
+  }
+
+  function onClose(){ closeModal() }
+
+  async function onCopy(){
+    try{
+      await navigator.clipboard.writeText(`${tip.title}\n\n${tip.text}`)
+      // feedback simples
+      modalCopy.textContent = 'Copiado ✓'
+      setTimeout(()=> modalCopy.textContent = 'Copiar', 1500)
+    }catch(e){
+      alert('Não foi possível copiar.')
+    }
+  }
+
+  modalCopy.addEventListener('click', onCopy)
+  modalClose.addEventListener('click', onClose)
+  modalCloseFooter.addEventListener('click', onClose)
 }
 
 searchInput.addEventListener('input', ()=> render())
